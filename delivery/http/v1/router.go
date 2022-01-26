@@ -13,7 +13,7 @@ func SetupRouters(e *echo.Echo) {
 	health := v1.Group("/health")
 
 	v1.GET("/status", StatusHandler)
-	v1.GET("/messages", GetMessageInfoHandler)
+	v1.GET("/word/occurrence", GetMessageInfoHandler)
 
 	health.GET("", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, &entity.Response{
