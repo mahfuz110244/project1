@@ -15,6 +15,17 @@ func SetupRouters(e *echo.Echo) {
 	v1.GET("/status", StatusHandler)
 	v1.GET("/word/occurrence", GetMessageInfoHandler)
 
+	// Login route
+	v1.POST("/login", login)
+
+	// Unauthenticated route
+	v1.GET("/", accessible)
+
+	// Restricted group
+	r := e.Group("/restricted")
+
+	r.GET("", restricted)
+
 	health.GET("", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, &entity.Response{
 			Success: true,
